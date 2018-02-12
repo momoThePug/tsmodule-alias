@@ -4,7 +4,7 @@
   "description": "Nodejs module loader from Typescript path alias",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "cd ./src; mocha -r ts-node/register -r tsconfig-paths/register **/*.spec.ts",
   },
   "author": "Daniel Vera Morales",
   "license": "MIT",
