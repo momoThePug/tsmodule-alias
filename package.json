@@ -1,0 +1,25 @@
+{
+  "name": "tsmodule-alias",
+  "version": "1.0.0",
+  "description": "Nodejs module loader from Typescript path alias",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Daniel Vera Morales",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^9.4.5",
+    "chalk": "^2.3.1",
+    "module-alias": "^2.0.6",
+    "prompt-confirm": "^1.2.0",
+    "typescript": "^2.7.1"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.0.4",
+    "@types/mocha": "^2.2.42",
+    "chai": "^4.1.2",
+    "mocha": "^3.5.0",
+    "ts-node": "^3.3.0"
+  }
+}
