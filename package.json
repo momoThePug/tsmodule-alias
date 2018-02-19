@@ -1,5 +1,5 @@
 {
-  "name": "@momoThePug/tsmodule-alias",
+  "name": "@momothepug/tsmodule-alias",
   "version": "0.1.2",
   "description": "Nodejs module loader from Typescript path alias",
   "main": "./src/tsmodule-alias.js",
