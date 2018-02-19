@@ -1,6 +1,6 @@
 {
-  "name": "momoThePug/tsmodule-alias",
-  "version": "0.1.1",
+  "name": "@momoThePug/tsmodule-alias",
+  "version": "0.1.2",
   "description": "Nodejs module loader from Typescript path alias",
   "main": "./src/tsmodule-alias.js",
   "scripts": {
@@ -8,6 +8,9 @@
     "start": "node ./dist/index.js",
     "build": "tsc -p \"./\"",
     "startbuild": "npm run build && npm run start"
+  },
+  "engines": {
+    "node": ">=6.12.0"
   },
  "homepage": "https://github.com/momoThePug/tsmodule-alias",
   "keywords": [
@@ -23,10 +26,6 @@
     "type": "git",
     "url": "git+https://github.com/momoThePug/tsmodule-alias.git"
    },
-  "bin": {
-    "tsmodule-alias": "./dist/tsmodule-alias.js",
-    "tsmodal": "./dist/index.js"
-  },
   "author": "Daniel Vera Morales",
   "license": "MIT",
   "dependencies": {

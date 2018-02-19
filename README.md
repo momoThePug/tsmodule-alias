@@ -6,7 +6,7 @@ Adds to the Node module loader any alias defined in a Typescript configuration f
 ## Install
 
 ```
-npm i --save tsmodule-alias
+npm i --save @momothepug/tsmodule-alias
 ```
 ## Usage
 Add this line to the main file of your app, before any code: 
