@@ -1,10 +1,17 @@
 {
   "name": "tsmodule-alias",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Nodejs module loader from Typescript path alias",
-  "main": "index.js",
+  "main": "./src/tsmodule-alias.js",
   "scripts": {
     "test": "cd ./src; mocha -r ts-node/register -r tsconfig-paths/register **/*.spec.ts",
+    "start": "node ./dist/index.js",
+    "build": "tsc -p \"./\"",
+    "startbuild": "npm run build && npm run start"
+  },
+  "bin": {
+    "tsmodule-alias": "./dist/tsmodule-alias.js",
+    "tsmodal": "./dist/index.js"
   },
   "author": "Daniel Vera Morales",
   "license": "MIT",
@@ -13,6 +20,7 @@
     "chalk": "^2.3.1",
     "module-alias": "^2.0.6",
     "prompt-confirm": "^1.2.0",
+   "rtrim": "^1.0.0",
     "typescript": "^2.7.1"
   },
   "devDependencies": {
@@ -20,6 +28,9 @@
     "@types/mocha": "^2.2.42",
     "chai": "^4.1.2",
     "mocha": "^3.5.0",
-    "ts-node": "^3.3.0"
+    "ts-node": "^3.3.0",
+    "tspath": "^1.2.10",
+    "typescript": "2.4.2",
+    "tsconfig-paths": "^3.1.1"
   }
 }

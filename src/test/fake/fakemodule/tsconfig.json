@@ -9,6 +9,11 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
+  "paths":{
+    "@mod":["morefake/level/"],
+    "@path":["momo/"],
+    "@other":["momo/momo"]
+},
   "include": [
     "./",
     "src/**/*"

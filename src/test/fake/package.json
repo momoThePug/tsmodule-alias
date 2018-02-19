@@ -1,0 +1,17 @@
+{
+  "name": "fakemod",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  },
+  "bin": {
+  },
+  "author": "Daniel Vera Morales",
+  "license": "MIT",
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}
+
