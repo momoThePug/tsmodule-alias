@@ -1,6 +1,6 @@
 {
-  "name": "tsmodule-alias",
-  "version": "0.1.0",
+  "name": "momoThePug/tsmodule-alias",
+  "version": "0.1.1",
   "description": "Nodejs module loader from Typescript path alias",
   "main": "./src/tsmodule-alias.js",
   "scripts": {
@@ -9,6 +9,20 @@
     "build": "tsc -p \"./\"",
     "startbuild": "npm run build && npm run start"
   },
+ "homepage": "https://github.com/momoThePug/tsmodule-alias",
+  "keywords": [
+    "extend",
+    "modules",
+    "node",
+    "path",
+    "typescript",
+    "alias",
+    "resolve"
+],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/momoThePug/tsmodule-alias.git"
+   },
   "bin": {
     "tsmodule-alias": "./dist/tsmodule-alias.js",
     "tsmodal": "./dist/index.js"
