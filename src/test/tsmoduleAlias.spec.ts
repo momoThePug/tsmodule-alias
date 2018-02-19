@@ -16,4 +16,5 @@ describe("NPM MODULE TSModuleAlias", () => {
     expect(momoPug).to.not.be.null;
     expect(momoPug.momo).to.be.equals("pug");
   });
+
 });

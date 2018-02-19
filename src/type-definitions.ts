@@ -13,6 +13,7 @@ export class AliasPathUtil {
    * @returns true if an alias is inside nodejs request otherwise false
    */
   static hasAlias(path: string, alias: string) {
+    alias = AliasPathUtil.stripWildcard(alias);
     if (path === null || alias === null || path === "" || alias === "") {
       return false;
     }
@@ -63,9 +64,22 @@ export class AliasPathUtil {
    * require('@foobar/any/mod') => require('/any/mod')
    */
   static normalizeRightSide(path: string, alias: string): string {
+    alias = AliasPathUtil.stripWildcard(alias);
     return path.substr(alias.length);
   }
 
+	/**
+	 * Removes the trailing "*" from a string (if any)
+	 * @param path
+	 * @returns {string}
+	 */
+  static stripWildcard(path: string): string {
+    if (path.endsWith("/*")) {
+      path = path.substr(0, path.length - 2);
+    }
+
+    return path;
+  }
   /**
    * Removes trailing slash
    * @param aliasPath value of alias:
@@ -76,6 +90,7 @@ export class AliasPathUtil {
    *    }
    */
   static normalizeAlias(aliasPath: string): string {
+    aliasPath =  AliasPathUtil.stripWildcard(aliasPath);
     return rtrim(aliasPath, "/");
   }
 }

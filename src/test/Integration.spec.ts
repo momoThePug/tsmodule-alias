@@ -20,6 +20,10 @@ describe("NodeRegister", () => {
     const fakedMod2 = require("@fakes/moredeeply/fakemodule2");
     expect(fakedMod2).not.to.be.null;
     expect(fakedMod2.plus).to.be.equals("viral");
+
+    const fakedMod3 = require("@foooovars/deep/moredeeply/fakemodule2");
+    expect(fakedMod3).not.to.be.null;
+    expect(fakedMod3.plus).to.be.equals("viral");
   });
 /*
   it("Should disable alias", () => {

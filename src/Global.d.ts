@@ -27,4 +27,9 @@ export declare class Package {
      * @param options
      */
     static projectData(dirname?: string, options?: any): HashMap<string, string>;
+    /**
+     * verifies if a NODE Module exists
+     * @param mod
+     */
+    static moduleExists(mod: string): boolean;
 }

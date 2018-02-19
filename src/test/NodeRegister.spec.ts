@@ -15,6 +15,8 @@ describe("AliasPathUtil", () => {
   afterEach(function() {});
 
   it("Should detect alias inside path", () => {
+    expect(AliasPathUtil.hasAlias("@mypath/hello/world/*", "@mypath/*")).to.be.true;
+    expect(AliasPathUtil.hasAlias("@mypath/hello/world", "@mypath/*")).to.be.true;
     expect(AliasPathUtil.hasAlias("@mypath/hello/world", "@mypath")).to.be.true;
     expect(AliasPathUtil.hasAlias("foobars/hello/world", "@mypath")).to.be
       .false;

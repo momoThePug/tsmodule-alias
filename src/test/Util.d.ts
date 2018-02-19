@@ -7,6 +7,7 @@ declare const _default: {
         "@system": string;
         "@fakes": string;
         "@fakes__": string;
+        "@foooovars/*": string;
     };
     aliaspath: string;
     alias: string;

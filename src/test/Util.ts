@@ -11,7 +11,8 @@ const paths = {
   "@includes": "includes/hello/world",
   "@system": "lorem/ipsum/dolor/consectetur/",
   "@fakes": __dirname + "/fake/deep",
-  "@fakes__": __dirname + "/fake"
+  "@fakes__": __dirname + "/fake",
+  "@foooovars/*": __dirname + "/fake/*"
 };
 
 export = {

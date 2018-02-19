@@ -1,50 +1,5 @@
 import { HashMap } from "./type-definitions";
 /**
- * Helpers to resolve Path alias format and normalization
- */
-export declare class AliasPathUtil {
-    /**
-     * @param path nodejs request
-     * @param alias to verify
-     * @returns true if an alias is inside nodejs request otherwise false
-     */
-    static hasAlias(path: string, alias: string): boolean;
-    /**
-     * Alias is replaced by its value if is defined inside a request
-     * @param request
-     * @param alias
-     * @param aliasPath
-     */
-    static getAliasedPath(request: string, alias: string, aliasPath: string): string;
-    /**
-     * Alias is replaced by its value if is defined inside a request
-     *
-     * @param request
-     * @param alias
-     * @param aliasPath
-     */
-    static buildPath(request: string, alias: string, aliasPath: string): string;
-    /**
-     * Removes alias inside nodejs require request
-     * @param path
-     * @param alias
-     *
-     * @example
-     * require('@foobar/any/mod') => require('/any/mod')
-     */
-    static normalizeRightSide(path: string, alias: string): string;
-    /**
-     * Removes trailing slash
-     * @param aliasPath value of alias:
-     *
-     * @example
-     *  aliasPath =  {
-     *      alias : aliasPath
-     *    }
-     */
-    static normalizeAlias(aliasPath: string): string;
-}
-/**
  *Wrapps Node's module instance to perform module resolution
  */
 export declare class NodeModuleResolver {
@@ -151,14 +106,17 @@ export declare class NodeRegister {
      *
      * @param aliases Register a collection of aliases is "aliases param" is passed otherwise no registration is done.
      */
-    static useRegister(aliases?: any): NodeRegister;
+    static useRegister(aliases?: HashMap<string, string>): NodeRegister;
     constructor(nodejsmodule?: any);
     private initialize(nodejsmodule?);
     aliasMap: HashMap<string, string>;
     /**
-     * @param request
+     * TODO: make it works
      */
     reset(): void;
+    /**
+     * TODO: make it works
+     */
     stop(): void;
     /**
      * add alias verification system to nodejs

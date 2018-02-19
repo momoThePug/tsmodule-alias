@@ -9,6 +9,10 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
+  "paths":{
+    "@root/*": "./src/*",
+    "@test/*": "./src/test/*"
+  },
   "include": [
     "./",
     "src/**/*"
