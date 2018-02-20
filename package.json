@@ -1,6 +1,6 @@
 {
   "name": "@momothepug/tsmodule-alias",
-  "version": "0.1.6",
+  "version": "0.2.0",
   "description": "Nodejs module loader from Typescript path alias",
   "main": "./dist/tsmodule-alias.js",
   "scripts": {
