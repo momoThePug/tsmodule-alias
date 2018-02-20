@@ -49,10 +49,10 @@ We can define in a typescript configuration file:
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "paths": {
-      "@root/*": "./src/*",
-      "@test/*": "./src/test/*",
-      "@mybeautifulModule": "./src/modules/my/module",
-      "@deepmodule": "./../../../my/own/module"
+      "@root/*": ["./src/*"],
+      "@test/*": ["./src/test/*"],
+      "@mybeautifulModule": ["./src/modules/my/module"],
+      "@deepmodule": ["./../../../my/own/module"]
     }
   },
   "include": ["./", "src/**/*"],
