@@ -22,7 +22,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/momoThePug/tsmodule-alias.git"
+    "url": "https://github.com/momoThePug/tsmodule-alias.git"
   },
   "author": "Daniel Vera Morales",
   "license": "MIT",
