@@ -45,10 +45,10 @@ export class HashMapGenerator implements IHashMapGenerator {
   static generate(
     strategy: string,
     dataHelper: any,
-    dirname: string = null
+    packageData:  HashMap<string, string>
   ): HashMap<string, string> {
     const mygenerator = new HashMapGenerator(strategy);
-    return mygenerator.build(dataHelper, Package.projectData(dirname));
+    return mygenerator.build(dataHelper, packageData);
   }
 
   /**

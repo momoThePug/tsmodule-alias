@@ -29,12 +29,15 @@ class TypescriptAliasGenerator {
      */
     extractData(typescriptConfig, basePath) {
         const wrapper = new JSONUtils_1.JsonWrapper(typescriptConfig);
-        const rootdir = wrapper.readCycl("compilerOptions>rootDir");
-        const paths = wrapper.readCycl("paths");
-        if (rootdir === null || paths === null) {
-            return null;
+        const baseUrl = wrapper.readCycl("compilerOptions>baseUrl");
+        const paths = wrapper.readCycl("compilerOptions>paths");
+        if (baseUrl === null || paths === null) {
+            throw Error("Typescript configuration is not correct, current values:" + JSON.stringify({
+                "baseUrl": baseUrl,
+                "paths": paths
+            }));
         }
-        return this.buildAliasMap(rootdir, paths, basePath);
+        return this.buildAliasMap(baseUrl, paths, basePath);
     }
     /**
      *
