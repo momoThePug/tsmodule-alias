@@ -1,6 +1,6 @@
 {
   "name": "@momothepug/tsmodule-alias",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Nodejs module loader from Typescript path alias",
   "main": "./dist/tsmodule-alias.js",
   "scripts": {
@@ -28,9 +28,6 @@
   "license": "MIT",
   "dependencies": {
     "@types/node": "^9.4.5",
-    "chalk": "^2.3.1",
-    "module-alias": "^2.0.6",
-    "prompt-confirm": "^1.2.0",
     "rtrim": "^1.0.0",
     "typescript": "^2.7.1"
   },
