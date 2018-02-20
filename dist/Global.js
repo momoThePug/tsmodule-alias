@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const type_definitions_1 = require("./type-definitions");
 const nodePath = require("path");
-const projectRoot = "../../../";
+const projectRoot = "../../../../";
 /**
  *
  */

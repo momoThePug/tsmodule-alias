@@ -4,7 +4,7 @@ import {
   FileFindResult
 } from "./vendor/duffman/parent-file-finder";
 const nodePath = require("path");
-const projectRoot = "../../../";
+const projectRoot = "../../../../";
 
 /**
  *

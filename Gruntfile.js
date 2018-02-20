@@ -3,7 +3,8 @@ module.exports = function(grunt) {
     
       grunt.initConfig({
           clean: {
-              build: ['./dist', './src/**/*.js']
+              build: ['./dist', './src/**/*.js'],
+              postbuild:['./src/**/*.js']
           },
           exec:{
               build:{
@@ -30,7 +31,7 @@ module.exports = function(grunt) {
       grunt.loadNpmTasks('grunt-exec');
       grunt.loadNpmTasks('grunt-contrib-clean');
       
-      grunt.registerTask('build', 'Compiles node code',['clean:build', 'exec:build', 'copy:build']);
+      grunt.registerTask('build', 'Compiles node code',['clean:build', 'exec:build', 'copy:build', 'clean:postbuild']);
       grunt.registerTask('test', 'test source code',[ 'exec:test' ]);
       grunt.registerTask('default','My default task',['build']);
     };   
