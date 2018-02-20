@@ -71,6 +71,29 @@ export class FileFindResult {
 }
 
 export class ParentFileFinder {
+  static buildPathStack(sep: string, startPath: string) {
+    let tmpStr = sep;
+    let parts = startPath.split(sep);
+    for (let i = 0; i < parts.length; i++) {
+      tmpStr = path.resolve(tmpStr, parts[i]);
+      tmpStr = Utils.ensureTrailingPathDelimiter(tmpStr);
+      parts[i] = tmpStr;
+    }
+    return parts;
+  }
+
+  /**
+   * Slice n number of places
+   * @param currentPath
+   * @param places
+   */
+  static ignorePlaces(currentPath: string, places: number) {
+    for (let i = 1; i <= places; i++) {
+      currentPath = path.dirname(currentPath);
+    }
+    return currentPath;
+  }
+
   /**
    * File finder which traverses parent directories
    * until a given filename is found.
@@ -78,27 +101,22 @@ export class ParentFileFinder {
    * @param filename
    * @returns {FileFindResult}
    */
-  public static findFile(startPath: string, filename: string): FileFindResult {
+  public static findFile(
+    startPath: string,
+    filename: string,
+    ignorePlaces: number = 0
+  ): FileFindResult {
     let result = new FileFindResult();
-    let sep = path.sep;
-    var parts = startPath.split(sep);
+    startPath = ParentFileFinder.ignorePlaces(startPath, ignorePlaces);
+    let parts = ParentFileFinder.buildPathStack(path.sep, startPath);
 
-    var tmpStr = sep;
-
-    for (var i = 0; i < parts.length; i++) {
-      tmpStr = path.resolve(tmpStr, parts[i]);
-      tmpStr = Utils.ensureTrailingPathDelimiter(tmpStr);
-      parts[i] = tmpStr;
-    }
-
-    for (var i = parts.length - 1; i > 0; i--) {
-      tmpStr = parts[i];
-      filename = path.resolve(tmpStr, filename);
-
-      if (fs.existsSync(filename)) {
+    for (let i = parts.length - 1; i > 0; i--) {
+      let tmpStr = parts[i];
+      let tmpfilename = path.resolve(tmpStr, filename);
+      if (fs.existsSync(tmpfilename)) {
         result.isFound = true;
         result.path = tmpStr;
-        result.result = filename;
+        result.result = tmpfilename;
         break;
       }
     }

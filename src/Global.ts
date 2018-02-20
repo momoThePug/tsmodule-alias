@@ -4,8 +4,7 @@ import {
   FileFindResult
 } from "./vendor/duffman/parent-file-finder";
 const nodePath = require("path");
-const projectRoot = "../../../../";
-
+const packageFile = "package.json";
 /**
  *
  */
@@ -36,17 +35,30 @@ export class Package {
   }
 
   /**
-   *
+   * Finds the implementation root and extracts its path.
+   * This removes the needing of using ../../../ to find a super package file.
    * @param dirname
-   * @param options
    */
-  static getRoot(dirname: string, options = null) {
-    if (options === null || typeof options === "string") {
-      options = { base: options };
-    }
-    return nodePath.resolve(
-      options.base || nodePath.join(dirname, projectRoot)
+  static findImplementorRoot(dirname: string): FileFindResult {
+    const modulePkg: FileFindResult = ParentFileFinder.findFile(
+      dirname,
+      packageFile
     );
+
+    if (!modulePkg.isFound) {
+      throw Error("Cannot resolve module package");
+    }
+    const implementorPkg: FileFindResult = ParentFileFinder.findFile(
+      modulePkg.path,
+      packageFile,
+      1
+    );
+
+    if (!implementorPkg.isFound) {
+      throw Error("Cannot resolve implementor package");
+    }
+
+    return implementorPkg;
   }
 
   /**
@@ -55,8 +67,8 @@ export class Package {
    * @param options
    */
   static projectPackage(dirname: string, options = null): string {
-    let base = Package.getRoot(dirname, options || {});
-    return base.replace(/\/package\.json$/, "") + "/package.json";
+    let base = Package.findImplementorRoot(dirname);
+    return base.result.replace(/\/package\.json$/, "") + "/package.json";
   }
 
   /**
@@ -73,7 +85,7 @@ export class Package {
     }
     return new HashMap<string, string>({
       package: Package.resolvePackageJSON(dirname, options),
-      root: Package.getRoot(dirname, options)
+      root: Package.findImplementorRoot(dirname).path
     });
   }
 
