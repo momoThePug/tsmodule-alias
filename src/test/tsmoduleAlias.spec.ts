@@ -5,7 +5,7 @@ import { Package } from "./../Global";
 
 const TSModuleAlias = require("./../tsmodule-alias");
 const tsconfigToReadFromRoot = "./";
-const modInNodeModules = __dirname + "/fake/fakemodule/node_modules/foobar/src";
+const modInNodeModules = __dirname + "/fake/fakemodule/node_modules/scope/foobar/src";
 
 describe("NPM MODULE TSModuleAlias", () => {
   it("Should load alias for node requirejs", () => {

@@ -1,4 +1,5 @@
 import { HashMap } from "./type-definitions";
+import { FileFindResult } from "./vendor/duffman/parent-file-finder";
 /**
  *
  */
@@ -10,11 +11,11 @@ export declare class Package {
      */
     static resolvePackageJSON(dirname: string, options?: any): any;
     /**
-     *
+     * Finds the implementation root and extracts its path.
+     * This removes the needing of using ../../../ to find a super package file.
      * @param dirname
-     * @param options
      */
-    static getRoot(dirname: string, options?: any): any;
+    static findImplementorRoot(dirname: string): FileFindResult;
     /**
      *
      * @param dirname

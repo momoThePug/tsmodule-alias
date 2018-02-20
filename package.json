@@ -2,17 +2,15 @@
   "name": "@momothepug/tsmodule-alias",
   "version": "0.1.2",
   "description": "Nodejs module loader from Typescript path alias",
-  "main": "./src/tsmodule-alias.js",
+  "main": "./dist/tsmodule-alias.js",
   "scripts": {
     "test": "cd ./src; mocha -r ts-node/register -r tsconfig-paths/register **/*.spec.ts",
-    "start": "node ./dist/index.js",
-    "build": "tsc -p \"./\"",
-    "startbuild": "npm run build && npm run start"
+    "build": "grunt build"
   },
   "engines": {
     "node": ">=6.12.0"
   },
- "homepage": "https://github.com/momoThePug/tsmodule-alias",
+  "homepage": "https://github.com/momoThePug/tsmodule-alias",
   "keywords": [
     "extend",
     "modules",
@@ -21,11 +19,11 @@
     "typescript",
     "alias",
     "resolve"
-],
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/momoThePug/tsmodule-alias.git"
-   },
+  },
   "author": "Daniel Vera Morales",
   "license": "MIT",
   "dependencies": {
@@ -33,17 +31,22 @@
     "chalk": "^2.3.1",
     "module-alias": "^2.0.6",
     "prompt-confirm": "^1.2.0",
-   "rtrim": "^1.0.0",
+    "rtrim": "^1.0.0",
     "typescript": "^2.7.1"
   },
   "devDependencies": {
     "@types/chai": "^4.0.4",
     "@types/mocha": "^2.2.42",
     "chai": "^4.1.2",
+    "grunt": "^1.0.2",
     "mocha": "^3.5.0",
     "ts-node": "^3.3.0",
+    "tsconfig-paths": "^3.1.1",
     "tspath": "^1.2.10",
     "typescript": "2.4.2",
-    "tsconfig-paths": "^3.1.1"
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-clean": "^1.1.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-exec": "^3.0.0"
   }
 }

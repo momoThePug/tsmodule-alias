@@ -66,3 +66,6 @@ import {MyClass} from '@deepmodule'
 But... there is a problem when you compile this project to be used by a Node interpreter:  Node interpreter cannot understand what the hell are  typescript **Path Aliases**! 
 
 To solve that we can use tsmodule-alias to read and load aliases from our tsconfig file.
+
+[npm-image]: https://img.shields.io/npm/v/@momothepug/tsmodule-alias.svg
+[npm-url]: https://npmjs.org/package/@momothepug/tsmodule-alias

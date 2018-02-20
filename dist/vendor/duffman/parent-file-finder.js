@@ -69,6 +69,27 @@ class FileFindResult {
 }
 exports.FileFindResult = FileFindResult;
 class ParentFileFinder {
+    static buildPathStack(sep, startPath) {
+        let tmpStr = sep;
+        let parts = startPath.split(sep);
+        for (let i = 0; i < parts.length; i++) {
+            tmpStr = path.resolve(tmpStr, parts[i]);
+            tmpStr = utils_1.Utils.ensureTrailingPathDelimiter(tmpStr);
+            parts[i] = tmpStr;
+        }
+        return parts;
+    }
+    /**
+     * Slice n number of places
+     * @param currentPath
+     * @param places
+     */
+    static ignorePlaces(currentPath, places) {
+        for (let i = 1; i <= places; i++) {
+            currentPath = path.dirname(currentPath);
+        }
+        return currentPath;
+    }
     /**
      * File finder which traverses parent directories
      * until a given filename is found.
@@ -76,23 +97,17 @@ class ParentFileFinder {
      * @param filename
      * @returns {FileFindResult}
      */
-    static findFile(startPath, filename) {
+    static findFile(startPath, filename, ignorePlaces = 0) {
         let result = new FileFindResult();
-        let sep = path.sep;
-        var parts = startPath.split(sep);
-        var tmpStr = sep;
-        for (var i = 0; i < parts.length; i++) {
-            tmpStr = path.resolve(tmpStr, parts[i]);
-            tmpStr = utils_1.Utils.ensureTrailingPathDelimiter(tmpStr);
-            parts[i] = tmpStr;
-        }
-        for (var i = parts.length - 1; i > 0; i--) {
-            tmpStr = parts[i];
-            filename = path.resolve(tmpStr, filename);
-            if (fs.existsSync(filename)) {
+        startPath = ParentFileFinder.ignorePlaces(startPath, ignorePlaces);
+        let parts = ParentFileFinder.buildPathStack(path.sep, startPath);
+        for (let i = parts.length - 1; i > 0; i--) {
+            let tmpStr = parts[i];
+            let tmpfilename = path.resolve(tmpStr, filename);
+            if (fs.existsSync(tmpfilename)) {
                 result.isFound = true;
                 result.path = tmpStr;
-                result.result = filename;
+                result.result = tmpfilename;
                 break;
             }
         }

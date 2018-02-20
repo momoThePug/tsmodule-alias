@@ -12,7 +12,7 @@ describe("AliasPathUtil", () => {
     beforeEach(function () { });
     afterEach(function () { });
     it("Should detect alias inside path", () => {
-        console.log(type_definitions_1.AliasPathUtil.stripWildcard("@asasa/*"));
+        chai_1.expect(type_definitions_1.AliasPathUtil.hasAlias("@mypath/hello/world/*", "@mypath/*")).to.be.true;
         chai_1.expect(type_definitions_1.AliasPathUtil.hasAlias("@mypath/hello/world", "@mypath/*")).to.be.true;
         chai_1.expect(type_definitions_1.AliasPathUtil.hasAlias("@mypath/hello/world", "@mypath")).to.be.true;
         chai_1.expect(type_definitions_1.AliasPathUtil.hasAlias("foobars/hello/world", "@mypath")).to.be

@@ -8,6 +8,13 @@ export declare class FileFindResult {
     result: string;
 }
 export declare class ParentFileFinder {
+    static buildPathStack(sep: string, startPath: string): string[];
+    /**
+     * Slice n number of places
+     * @param currentPath
+     * @param places
+     */
+    static ignorePlaces(currentPath: string, places: number): string;
     /**
      * File finder which traverses parent directories
      * until a given filename is found.
@@ -15,5 +22,5 @@ export declare class ParentFileFinder {
      * @param filename
      * @returns {FileFindResult}
      */
-    static findFile(startPath: string, filename: string): FileFindResult;
+    static findFile(startPath: string, filename: string, ignorePlaces?: number): FileFindResult;
 }

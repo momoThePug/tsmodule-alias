@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const type_definitions_1 = require("./type-definitions");
+const parent_file_finder_1 = require("./vendor/duffman/parent-file-finder");
 const nodePath = require("path");
-const projectRoot = "../../../";
+const packageFile = "package.json";
 /**
  *
  */
@@ -31,15 +32,20 @@ class Package {
         return npmPackage;
     }
     /**
-     *
+     * Finds the implementation root and extracts its path.
+     * This removes the needing of using ../../../ to find a super package file.
      * @param dirname
-     * @param options
      */
-    static getRoot(dirname, options = null) {
-        if (options === null || typeof options === "string") {
-            options = { base: options };
+    static findImplementorRoot(dirname) {
+        const modulePkg = parent_file_finder_1.ParentFileFinder.findFile(dirname, packageFile);
+        if (!modulePkg.isFound) {
+            throw Error("Cannot resolve module package");
         }
-        return nodePath.resolve(options.base || nodePath.join(dirname, projectRoot));
+        const implementorPkg = parent_file_finder_1.ParentFileFinder.findFile(modulePkg.path, packageFile, 1);
+        if (!implementorPkg.isFound) {
+            throw Error("Cannot resolve implementor package");
+        }
+        return implementorPkg;
     }
     /**
      *
@@ -47,8 +53,8 @@ class Package {
      * @param options
      */
     static projectPackage(dirname, options = null) {
-        let base = Package.getRoot(dirname, options || {});
-        return base.replace(/\/package\.json$/, "") + "/package.json";
+        let base = Package.findImplementorRoot(dirname);
+        return base.result.replace(/\/package\.json$/, "") + "/package.json";
     }
     /**
      *
@@ -61,7 +67,7 @@ class Package {
         }
         return new type_definitions_1.HashMap({
             package: Package.resolvePackageJSON(dirname, options),
-            root: Package.getRoot(dirname, options)
+            root: Package.findImplementorRoot(dirname).path
         });
     }
     /**
