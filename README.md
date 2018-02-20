@@ -13,7 +13,7 @@ Add this line to the main file of your app, before any code:
 
 ```js
 // www.js, index.js, main.js, etc
-const TSModuleAlias = require("tsmodule-alias");
+const TSModuleAlias = require("@momothepug/tsmodule-alias");
 // path from package.json to your tsconfig.json file
 const tsconfigToReadFromRoot = "./";
 // make it work with play method
