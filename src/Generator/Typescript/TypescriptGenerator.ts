@@ -47,14 +47,17 @@ class TypescriptAliasGenerator implements IHashMapGenerator {
     basePath: string
   ): HashMap<string, string> {
     const wrapper: JsonWrapper = new JsonWrapper(typescriptConfig);
-    const rootdir: any = wrapper.readCycl("compilerOptions>rootDir");
-    const paths: any = wrapper.readCycl("paths");
+    const baseUrl: any = wrapper.readCycl("compilerOptions>baseUrl");
+    const paths: any = wrapper.readCycl("compilerOptions>paths");
 
-    if (rootdir === null || paths === null) {
-      return null;
+    if (baseUrl === null || paths === null) {
+      throw Error("Typescript configuration is not correct, current values:" + JSON.stringify( {
+        "baseUrl" : baseUrl,
+        "paths": paths
+      } ));
     }
 
-    return this.buildAliasMap(rootdir, paths, basePath);
+    return this.buildAliasMap(baseUrl, paths, basePath);
   }
 
   /**

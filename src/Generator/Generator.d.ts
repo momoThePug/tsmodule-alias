@@ -20,7 +20,7 @@ export declare class HashMapGenerator implements IHashMapGenerator {
      * @param dirname (optional) current working directory used to resolve dependencies and generator loading
      * @returns a hashmap with aliases and paths to be registered
      */
-    static generate(strategy: string, dataHelper: any, dirname?: string): HashMap<string, string>;
+    static generate(strategy: string, dataHelper: any, packageData: HashMap<string, string>): HashMap<string, string>;
     /**
      * Invoke build operation to retrieve a hashmap of aliases
      * @param sourceName

@@ -39,9 +39,9 @@ class HashMapGenerator {
      * @param dirname (optional) current working directory used to resolve dependencies and generator loading
      * @returns a hashmap with aliases and paths to be registered
      */
-    static generate(strategy, dataHelper, dirname = null) {
+    static generate(strategy, dataHelper, packageData) {
         const mygenerator = new HashMapGenerator(strategy);
-        return mygenerator.build(dataHelper, Global_1.Package.projectData(dirname));
+        return mygenerator.build(dataHelper, packageData);
     }
     /**
      * Invoke build operation to retrieve a hashmap of aliases

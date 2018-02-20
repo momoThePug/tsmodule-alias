@@ -2,6 +2,7 @@ import { HashMapGenerator } from "./../Generator/Generator";
 import "ts-node";
 import "mocha";
 import { expect } from "chai";
+import { Package } from "./../Global";
 
 const setTo = __dirname + "/fake/fakemodule/node_modules/scope/foobar/src";
 const typescriptconfg = "tsconfig.json";
@@ -12,7 +13,7 @@ describe("Generator loader", () => {
     const result = HashMapGenerator.generate(
       fakegenerator,
       typescriptconfg,
-      setTo
+      Package.projectData(setTo)
     );
     expect(result).to.not.be.null;
     expect(result.get("foo")).to.not.be.null;
