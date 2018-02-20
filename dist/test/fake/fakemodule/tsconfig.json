@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "outDir": "./",
+    "strict": false,
+    "rootDir": "./",
+    "declaration": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "paths":{
+    "@mod":["morefake/level/"],
+    "@path":["momo/"],
+    "@other":["momo/momo"]
+},
+  "include": [
+    "./",
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
