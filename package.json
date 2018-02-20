@@ -1,6 +1,6 @@
 {
   "name": "@momothepug/tsmodule-alias",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Nodejs module loader from Typescript path alias",
   "main": "./dist/tsmodule-alias.js",
   "scripts": {
@@ -22,7 +22,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/momoThePug/tsmodule-alias.git"
+    "url": "https://github.com/momoThePug/tsmodule-alias.git"
   },
   "author": "Daniel Vera Morales",
   "license": "MIT",
