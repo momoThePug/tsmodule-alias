@@ -1,7 +1,7 @@
-> **NOTE:** Help me improve this project by reporting any issue.
 # tsmodule-alias
-
 [![NPM Version][npm-image]][npm-url]
+
+> **NOTE:** Help me improve this project by reporting any issue.
 
 Adds to the Node module loader any alias defined in a Typescript configuration file. An example is available at https://github.com/momoThePug/tsmodule-alias-example
 
@@ -37,13 +37,13 @@ Only index zero will be used for path resolution in any alias definition. Ej:
 ```
 
 ## Nodejs & Typescript problem background
-In typescript to avoid (the path hell) like the following:
+To avoid the path hell in typescript like the following example:
 
 ```typescript
 import { MyClass } from "../../../my/own/module";
 ```
 
-We can define aliases in tsconfig.json file using the  "paths" index & "baseUrl" index:
+We can define aliases in tsconfig.json file using "paths" & "baseUrl" indexes:
 
 ```json
 {
