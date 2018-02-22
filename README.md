@@ -1,9 +1,10 @@
-> **NOTE:** Help me improve this project by reporting any issue.
 # tsmodule-alias
 
 [![NPM Version][npm-image]][npm-url]
 
-Adds to the Node module loader any alias defined in a Typescript configuration file. An example is available at https://github.com/momoThePug/tsmodule-alias-example
+> **NOTE:** Help me improve this project by reporting any issue.
+
+Adds to Node module loader any alias defined in a Typescript configuration file. An example is available at https://github.com/momoThePug/tsmodule-alias-example
 
 ## Install
 
@@ -12,7 +13,7 @@ npm i --save @momothepug/tsmodule-alias
 ```
 
 ## Usage
-Add this line to the main file of your app, before any code:
+Add these lines to your app's main file, before any code:
 
 ```js
 // www.js, index.js, main.js, etc
@@ -21,9 +22,9 @@ const TSModuleAlias = require("@momothepug/tsmodule-alias");
 const tsconfigToReadFromRoot = "./";
 // Makes it work with play method
 const aliasRegister = TSModuleAlias.play(tsconfigToReadFromRoot);
-// Alias map loaded to nodejs from typescript paths
+// Alias map loaded to nodejs from typescript paths (optional)
 console.log(aliasRegister.nodeRegister.aliasMap);
-// Displays root module and typescript project path
+// Displays root module and typescript project path (optional)
 console.log(aliasRegister.currentEnvironmentData);
 ```
 
@@ -37,13 +38,13 @@ Only index zero will be used for path resolution in any alias definition. Ej:
 ```
 
 ## Nodejs & Typescript problem background
-In typescript to avoid (the path hell) like the following:
+To avoid the path hell in typescript like the following example:
 
 ```typescript
 import { MyClass } from "../../../my/own/module";
 ```
 
-We can define aliases in tsconfig.json file using the  "paths" index & "baseUrl" index:
+We can define aliases in tsconfig.json file using "paths" & "baseUrl" indexes:
 
 ```json
 {
