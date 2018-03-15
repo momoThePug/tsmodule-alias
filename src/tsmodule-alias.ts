@@ -1,7 +1,8 @@
 const TypescriptAliasGenerator = require("./Generator/Typescript/TypescriptGenerator");
 import { NodeRegister } from "./NodeRegister";
 import { HashMapGenerator } from "./Generator/Generator";
-import { HashMap, AliasPathUtil } from "./type-definitions";
+import { HashMap } from "./type-definitions";
+import { AliasPathUtil } from "./AliasPathUtil";
 import { Package } from "./Global";
 
 /**

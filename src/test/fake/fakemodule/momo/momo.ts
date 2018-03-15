@@ -1,3 +1,3 @@
 export = {
-    "momo" : "pug"
+  momo: "pug"
 };

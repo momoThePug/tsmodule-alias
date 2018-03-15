@@ -7,7 +7,8 @@ const paths = {
     "@system": "lorem/ipsum/dolor/consectetur/",
     "@fakes": __dirname + "/fake/deep",
     "@fakes__": __dirname + "/fake",
-    "@foooovars/*": __dirname + "/fake/*"
+    "@foooovars/*": __dirname + "/fake/*",
+    "@windowsfakes/bar/*": __dirname + "aaa/bbb/ccc/fakemo/dule/foo/bar"
 };
 module.exports = {
     paths: paths,

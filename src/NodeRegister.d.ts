@@ -73,16 +73,16 @@ export declare class FileNameResolver {
      */
     verifyAliases(path: string): string;
     /**
-     *
      * @param path
+     * @returns a set of data to be consumed by file loaders
      */
     getAliasData(path: string): any;
     /**
-     *
+     * TODO
      */
     stop(): void;
     /**
-     *
+     *TODO
      */
     reset(): void;
 }

@@ -20,8 +20,8 @@ module.exports = function(grunt) {
       }
     },
     clean: {
-      build: ["./dist", "./src/**/*.js"],
-      postbuild: ["./src/**/*.js"]
+      build: ["dist", "src/**/*.js"],
+      postbuild: ["src/**/*.js"]
     },
     exec: {
       build: {
@@ -36,9 +36,9 @@ module.exports = function(grunt) {
         files: [
           {
             expand: true,
-            cwd: "./src",
+            cwd: "src",
             src: ["**/*", "!**/*.ts", "!**/test", "!**/*.map"],
-            dest: "./dist"
+            dest: "dist"
           }
         ]
       }
@@ -48,7 +48,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-contrib-copy");
   grunt.loadNpmTasks("grunt-exec");
   grunt.loadNpmTasks("grunt-contrib-clean");
-  grunt.loadNpmTasks('grunt-bump');
+  grunt.loadNpmTasks("grunt-bump");
   grunt.registerTask("build", "Compiles node code", [
     "clean:build",
     "exec:build",

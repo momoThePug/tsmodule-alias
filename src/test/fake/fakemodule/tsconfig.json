@@ -11,6 +11,7 @@
     "paths": {
       "@mod": ["morefake/level/"],
       "@path": ["momo/"],
+      "@other_one": ["momo\\momo\\momo"],
       "@other": ["momo/momo"]
     }
   },
