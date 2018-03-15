@@ -9,28 +9,63 @@ import { Package } from "./Global";
  * Main NPM Module
  */
 class TsModuleAlias {
-  private hashMapContainer: HashMap<string, string>;
   private _nodeRegister: NodeRegister;
-  private _packageData: HashMap<string, string>;
+
   /**
-   * @param tsconfigPath
+   *
+   */
+  static use(jsonMap: any, rootPath: string = null): TsModuleAlias {
+    const _packageData = Package.projectData(rootPath);
+    return TsModuleAlias.__start__(jsonMap, _packageData);
+  }
+
+  /**
+   * Initialize TsModuleAlias with any HashMap object:
+   *   {
+   *     alias: path
+   *   }
+   */
+  static __start__(
+    jsonMap: HashMap<string, string> | any,
+    environment: HashMap<string, string>
+  ) {
+    if (!(<HashMap<string, string>>jsonMap.add)) {
+      jsonMap = new HashMap<string, string>(jsonMap);
+    }
+    const instance: TsModuleAlias = new TsModuleAlias(jsonMap, environment);
+    return instance;
+  }
+
+  /**
+   * Starts using typescript file as an alias source
    */
   static play(tsconfigPath: string, rootPath: string = null): TsModuleAlias {
-    const instance: TsModuleAlias = new TsModuleAlias(tsconfigPath, rootPath);
-    return instance;
+    const _packageData = Package.projectData(rootPath);
+    const hashMapContainer = HashMapGenerator.generate(
+      "Typescript/Typescript",
+      tsconfigPath,
+      _packageData
+    );
+    return TsModuleAlias.__start__(hashMapContainer, _packageData);
   }
 
   /**
    * @param tsconfigPath root path for typescript project
    */
-  constructor(tsconfigPath: string, rootPath: string = null) {
-    this._packageData = Package.projectData(rootPath);
-    this.hashMapContainer = HashMapGenerator.generate(
-      "Typescript/Typescript",
-      tsconfigPath,
-      this._packageData
-    );
+  constructor(
+    private hashMapContainer: HashMap<string, string>,
+    private _packageData: HashMap<string, string>
+  ) {
     this._nodeRegister = NodeRegister.useRegister(this.hashMapContainer);
+  }
+
+  /**
+   * @param alias
+   * @param path
+   */
+  addPathAlias(alias: string, path: string, ): TsModuleAlias {
+    this._nodeRegister.aliasMap.add(alias, path);
+    return this;
   }
 
   /**
