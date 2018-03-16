@@ -53,8 +53,9 @@ class Package {
      * @param options
      */
     static projectPackage(dirname, options = null) {
-        let base = Package.findImplementorRoot(dirname);
-        return base.result.replace(/\/package\.json$/, "") + "/package.json";
+        const base = Package.findImplementorRoot(dirname);
+        const projectPath = base.result.replace(/[\\\/]package[\\\.]json$/, "");
+        return nodePath.join(projectPath, "package.json");
     }
     /**
      *

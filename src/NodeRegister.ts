@@ -1,4 +1,7 @@
-import { HashMap, AliasPathUtil} from "./type-definitions";
+import { HashMap } from "./type-definitions";
+import { AliasPathUtil } from "./AliasPathUtil";
+
+const nodePath = require("path");
 
 /**
  *Wrapps Node's module instance to perform module resolution
@@ -158,12 +161,16 @@ export class FileNameResolver {
   }
 
   /**
-   *
    * @param path
+   * @returns a set of data to be consumed by file loaders
    */
   getAliasData(path: string): any {
     const data = this.aliasCollection.each(
       (aliasPath: string, aliasIndex: string) => {
+        aliasPath = nodePath.normalize(aliasPath);
+        aliasIndex = nodePath.normalize(aliasIndex);
+        path = nodePath.normalize(path);
+
         if (!AliasPathUtil.hasAlias(path, aliasIndex)) {
           return;
         }
@@ -180,14 +187,14 @@ export class FileNameResolver {
   }
 
   /**
-   *
+   * TODO
    */
   stop(): void {
     this.enabled = false;
   }
 
   /**
-   *
+   *TODO
    */
   reset(): void {
     if (this.cached.isEmpty()) {

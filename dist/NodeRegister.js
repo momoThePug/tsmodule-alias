@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const type_definitions_1 = require("./type-definitions");
+const AliasPathUtil_1 = require("./AliasPathUtil");
+const nodePath = require("path");
 /**
  *Wrapps Node's module instance to perform module resolution
  */
@@ -133,17 +135,20 @@ class FileNameResolver {
         return mypath["resolved"];
     }
     /**
-     *
      * @param path
+     * @returns a set of data to be consumed by file loaders
      */
     getAliasData(path) {
         const data = this.aliasCollection.each((aliasPath, aliasIndex) => {
-            if (!type_definitions_1.AliasPathUtil.hasAlias(path, aliasIndex)) {
+            aliasPath = nodePath.normalize(aliasPath);
+            aliasIndex = nodePath.normalize(aliasIndex);
+            path = nodePath.normalize(path);
+            if (!AliasPathUtil_1.AliasPathUtil.hasAlias(path, aliasIndex)) {
                 return;
             }
             return {
                 request: path,
-                resolved: type_definitions_1.AliasPathUtil.getAliasedPath(path, aliasIndex, aliasPath),
+                resolved: AliasPathUtil_1.AliasPathUtil.getAliasedPath(path, aliasIndex, aliasPath),
                 alias: aliasIndex,
                 path: aliasPath
             };
@@ -151,13 +156,13 @@ class FileNameResolver {
         return data || null;
     }
     /**
-     *
+     * TODO
      */
     stop() {
         this.enabled = false;
     }
     /**
-     *
+     *TODO
      */
     reset() {
         if (this.cached.isEmpty()) {
