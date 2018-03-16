@@ -40,9 +40,12 @@ class TsModuleAlias {
     /**
      * Starts using typescript file as an alias source
      */
-    static play(tsconfigPath, rootPath = null) {
+    static play(tsconfigPath, map = null, rootPath = null) {
         const _packageData = Global_1.Package.projectData(rootPath);
         const hashMapContainer = Generator_1.HashMapGenerator.generate("Typescript/Typescript", tsconfigPath, _packageData);
+        if (map !== null) {
+            hashMapContainer.merge(new type_definitions_1.HashMap(map));
+        }
         return TsModuleAlias.__start__(hashMapContainer, _packageData);
     }
     /**
@@ -50,7 +53,7 @@ class TsModuleAlias {
      * @param path
      */
     addPathAlias(alias, path) {
-        this.nodeRegister.aliasMap.add(alias, path);
+        this._nodeRegister.aliasMap.add(alias, path);
         return this;
     }
     /**

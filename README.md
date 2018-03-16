@@ -13,7 +13,10 @@ npm i --save @momothepug/tsmodule-alias
 ```
 
 ## Usage
+
 Add these lines to your app's main file, before any code:
+
+**Option A - Alias from Typescript file**
 
 ```js
 // www.js, index.js, main.js, etc
@@ -28,6 +31,60 @@ console.log(aliasRegister.nodeRegister.aliasMap);
 console.log(aliasRegister.currentEnvironmentData);
 ```
 
+**Option B - Alias from Typescript file With custom aliases**
+
+```js
+// www.js, index.js, main.js, etc
+const TSModuleAlias = require("@momothepug/tsmodule-alias");
+// Path from package.json to your tsconfig.json file
+const tsconfigToReadFromRoot = "./";
+// Makes it work with play method, merging custom aliases
+const aliasRegister = TSModuleAlias.play(tsconfigToReadFromRoot, {
+  "@crazyAlias": __dirname + "/path/to/my/object"
+});
+// Alias map loaded to nodejs from typescript paths (optional)
+console.log(aliasRegister.nodeRegister.aliasMap);
+// Displays root module and typescript project path (optional)
+console.log(aliasRegister.currentEnvironmentData);
+```
+
+**Option C - Dynamic aliases on the fly for development purpose**
+
+You can override an alias value or define a new alias on runtime by invoking `addPathAlias("alias", "/path/to/your/module")` just like in our example:
+
+```js
+// www.js, index.js, main.js, etc
+const TSModuleAlias = require("@momothepug/tsmodule-alias");
+// Path from package.json to your tsconfig.json file
+const tsconfigToReadFromRoot = "./";
+// Makes it work with play method
+const aliasRegister = TSModuleAlias.play(tsconfigToReadFromRoot);
+// Defining/overriding an alias programatically, path value must be an absolute path
+aliasRegister.addPathAlias(
+  "@my_dynamic_alias",
+  __dirname + "/leo/orange/dog/orange"
+);
+```
+
+**Option D - Dynamic aliases on the fly**
+
+You can register aliases using an object like the following example:
+
+```js
+const tSModuleAlias = require("@momothepug/tsmodule-alias");
+
+// make it work using custom alias before execution
+const aliasRegister = tSModuleAlias.use({
+  "@leoAlias": __dirname + "/leo/orange/dog/orange",
+  "@pugpath/pug": __dirname + "/myfooobar/func",
+  "@bar": __dirname + "/bar/bar"
+});
+
+console.log(require("@bar"));
+console.log(require("@pugpath/pug")("Jhon Doe"));
+console.log(require("@leoAlias"));
+```
+
 ## Path resolution strategy
 
 Only index zero will be used for path resolution in any alias definition. Ej:
@@ -38,6 +95,7 @@ Only index zero will be used for path resolution in any alias definition. Ej:
 ```
 
 ## Nodejs & Typescript problem background
+
 To avoid the path hell in typescript like the following example:
 
 ```typescript
@@ -75,11 +133,12 @@ That way we can use our aliases in any import:
 import { MyClass } from "@deepmodule";
 ```
 
-**But...** 
+**But...**
 
 There is a problem when you compile a typescript project to be consumed by a Node interpreter: Node cannot understand what the hell are typescript **Path Aliases**!. To solve that you can use tsmodule-alias to read and load aliases from your tsconfig file.
 
 **Nodejs Error thrown by the interpreter (example)**
+
 ```
    module.js:471
     throw err;
@@ -104,13 +163,13 @@ npm ERR! npm  v3.10.10
 npm ERR! code ELIFECYCLE
 npm ERR! you-mod@1.0.0 start: ` npm run build && node index.js `
 npm ERR! Exit status 1
-npm ERR! 
+npm ERR!
 npm ERR! Failed at the you-mod@1.0.0 start script ' npm run build && node index.js '.
 npm ERR! Make sure you have the latest version of node.js and npm installed.
 npm ERR! If you do, this is most likely a problem with the you-mod package,
 npm ERR! not with npm itself.
 npm ERR! Tell the author that this fails on your system:
-npm ERR!      npm run build && node index.js 
+npm ERR!      npm run build && node index.js
 npm ERR! You can get information on how to open an issue for this project with:
 npm ERR!     npm bugs you-mod
 npm ERR! Or if that isn't available, you can get their info via:
@@ -119,7 +178,6 @@ npm ERR! There is likely additional logging output above.
 
 npm ERR! Please include the following file with any support request:
 npm ERR!     /home/youruser/crazy/path/you-mod/npm-debug.log
-
 ```
 
 :p Be happy

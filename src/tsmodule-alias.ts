@@ -39,13 +39,20 @@ class TsModuleAlias {
   /**
    * Starts using typescript file as an alias source
    */
-  static play(tsconfigPath: string, rootPath: string = null): TsModuleAlias {
+  static play(
+    tsconfigPath: string,
+    map = null,
+    rootPath: string = null
+  ): TsModuleAlias {
     const _packageData = Package.projectData(rootPath);
     const hashMapContainer = HashMapGenerator.generate(
       "Typescript/Typescript",
       tsconfigPath,
       _packageData
     );
+    if (map !== null) {
+      hashMapContainer.merge(new HashMap<string, string>(map));
+    }
     return TsModuleAlias.__start__(hashMapContainer, _packageData);
   }
 
@@ -63,7 +70,7 @@ class TsModuleAlias {
    * @param alias
    * @param path
    */
-  addPathAlias(alias: string, path: string, ): TsModuleAlias {
+  addPathAlias(alias: string, path: string): TsModuleAlias {
     this._nodeRegister.aliasMap.add(alias, path);
     return this;
   }
