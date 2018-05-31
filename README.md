@@ -2,6 +2,8 @@
 
 [![NPM Version][npm-image]][npm-url]
 
+> **NOTE:** Before using any library for aliasing, try to improve your code structure as described [here](https://github.com/Microsoft/TypeScript/issues/9259#issuecomment-379305730) and [here](https://github.com/Microsoft/TypeScript/issues/9259#issuecomment-379372041).
+
 > **NOTE:** Help me improve this project by reporting any issue.
 
 Adds to Node module loader any alias defined in a Typescript configuration file. An example is available at https://github.com/momoThePug/tsmodule-alias-example
