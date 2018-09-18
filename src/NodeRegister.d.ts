@@ -58,7 +58,7 @@ export declare class FileNameResolver {
      * @param parent
      * @param isMain
      */
-    private customFileNameResolver(request, parent, isMain);
+    private customFileNameResolver;
     alias: HashMap<string, string>;
     /**
      *  overrides nodejs _resolveFilename function with our own resolver.
@@ -108,7 +108,7 @@ export declare class NodeRegister {
      */
     static useRegister(aliases?: HashMap<string, string>): NodeRegister;
     constructor(nodejsmodule?: any);
-    private initialize(nodejsmodule?);
+    private initialize;
     aliasMap: HashMap<string, string>;
     /**
      * TODO: make it works

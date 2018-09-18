@@ -49,4 +49,42 @@ export declare class AliasPathUtil {
      *    }
      */
     static normalizeAlias(aliasPath: string): string;
+    /**
+     * Find any directory using a file name as needle.
+     *
+     * @param startScanFrom base directory to start searching
+     * @param fileToSearchFor the needle to look for
+     * @param maxTry  max number of iterations
+     * @return object with indexes:
+     *  file: (string) the needle with directory prepended
+     *  directory: (string) current directory found
+     *  fileExists: (boolen) true if directory is found otherwise false
+     */
+    static findFileDirectory(startScanFrom: string, fileToSearchFor: string, maxTry?: number): {
+        file: string;
+        directory: string;
+        fileExists: boolean;
+    };
+    /**
+     * Extracts a string from a base string.
+     * @param base  string which will be looked for
+     * @param stripFrom  string to be removed from the base
+     * @param stripStartsWith characters to be stripped out from the resulting string
+     */
+    static diffString(base: string, stripFrom: string, stripStartsWith?: string): string;
+    /**
+     * Find typescript config path, if your class is  invoking
+     * momotThePug's module in a linear directory back slashes.
+     * @param startScanFrom usually __dirname value is passed
+     * @param rootProjectFile file that marks a directory as root
+     * @param tsconfigFile tsconfig file that marks as typescript project
+     */
+    static findTSConfigToReadFromRoot(startScanFrom: string, rootPath?: any, tsconfigFile?: string): {
+        diff: string;
+        ts: {
+            file: string;
+            directory: string;
+            fileExists: boolean;
+        };
+    };
 }

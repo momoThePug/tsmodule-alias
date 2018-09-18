@@ -13,7 +13,7 @@ export declare class HashMapGenerator implements IHashMapGenerator {
     /**
      * @param strategy
      */
-    private load(strategy);
+    private load;
     /**
      * @param strategy  Strategy name without "Generator" sufix
      * @param dataHelper any data to be passed and proccesed
