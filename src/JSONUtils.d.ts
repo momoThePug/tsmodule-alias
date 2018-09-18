@@ -112,7 +112,7 @@ export declare class JsonReader {
      * @param useReader true si se necesita un wrapper o false de lo contrario.
      */
     constructor(fileToRead: string, useReader?: boolean);
-    private formatFileName();
+    private formatFileName;
     /**
      * Leer archivo
      */

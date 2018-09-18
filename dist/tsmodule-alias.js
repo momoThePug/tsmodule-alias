@@ -4,6 +4,7 @@ const TypescriptAliasGenerator = require("./Generator/Typescript/TypescriptGener
 const NodeRegister_1 = require("./NodeRegister");
 const Generator_1 = require("./Generator/Generator");
 const type_definitions_1 = require("./type-definitions");
+const AliasPathUtil_1 = require("./AliasPathUtil");
 const Global_1 = require("./Global");
 /**
  * Main NPM Module
@@ -47,6 +48,15 @@ class TsModuleAlias {
             hashMapContainer.merge(new type_definitions_1.HashMap(map));
         }
         return TsModuleAlias.__start__(hashMapContainer, _packageData);
+    }
+    /**
+     *   Starts using typescript file as an alias source, going backward looking for
+     *   our typescript config file.
+     *  @param startScanFrom usually __dirname value is passed
+     */
+    static playAuto(startScanFrom, map = null, rootPath = null) {
+        const tsconfigPath = AliasPathUtil_1.AliasPathUtil.findTSConfigToReadFromRoot(startScanFrom, rootPath);
+        return TsModuleAlias.play(tsconfigPath.diff, map, rootPath);
     }
     /**
      * @param alias

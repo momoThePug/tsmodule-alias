@@ -38,6 +38,13 @@ class TsModuleAlias {
 
   /**
    * Starts using typescript file as an alias source
+   * @param tsconfigPath
+   * @param map json to store on the fly alias paths:
+   *        {
+   *          "@crazyAlias": __dirname + "/path/to/my/object"
+   *        }
+   * @param rootPath  absolute path to root project, if null momoThePug 
+   * will resolve automatically
    */
   static play(
     tsconfigPath: string,
@@ -54,6 +61,24 @@ class TsModuleAlias {
       hashMapContainer.merge(new HashMap<string, string>(map));
     }
     return TsModuleAlias.__start__(hashMapContainer, _packageData);
+  }
+
+
+
+  /**
+   *   Starts using typescript file as an alias source, going backward looking for
+   *   our typescript config file.
+   *  @param startScanFrom usually __dirname value is passed
+   * @param map json to store on the fly alias paths:
+   *        {
+   *          "@crazyAlias": __dirname + "/path/to/my/object"
+   *        }
+   * @param rootPath  absolute path to root project, if null momoThePug 
+   * will resolve automatically
+   */
+  static playAuto(startScanFrom: string, map = null, rootPath: string = null) {
+    const tsconfigPath = AliasPathUtil.findTSConfigToReadFromRoot(startScanFrom, rootPath);
+    return TsModuleAlias.play(tsconfigPath.diff, map, rootPath);
   }
 
   /**

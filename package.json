@@ -4,8 +4,7 @@
   "description": "Nodejs module loader from Typescript path alias",
   "main": "dist/tsmodule-alias.js",
   "scripts": {
-    "test":
-      "mocha -r ts-node/register -r tsconfig-paths/register src/**/*.spec.ts",
+    "test": "mocha -r ts-node/register -r tsconfig-paths/register src/**/*.spec.ts",
     "build": "grunt build"
   },
   "engines": {

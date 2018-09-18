@@ -1,6 +1,8 @@
+import { Package } from './Global';
 export const FILE_ENCODING = "UTF-8";
 const nodePath = require("path");
 const rtrim = require("rtrim");
+const fs = require('fs');
 
 /**
  * Helpers to resolve Path alias format and normalization
@@ -94,5 +96,67 @@ export class AliasPathUtil {
       aliasPath = aliasPath.substr(0, aliasPath.length - 1);
     }
     return aliasPath;
+  }
+
+  /**
+   * Find any directory using a file name as needle.
+   * 
+   * @param startScanFrom base directory to start searching
+   * @param fileToSearchFor the needle to look for
+   * @param maxTry  max number of iterations 
+   * @return object with indexes: 
+   *  file: (string) the needle with directory prepended
+   *  directory: (string) current directory found
+   *  fileExists: (boolen) true if directory is found otherwise false
+   */
+  static findFileDirectory(startScanFrom: string, fileToSearchFor: string, maxTry = 10) {
+    let file = "";
+    let directory = startScanFrom;
+    let maxNum = 0;
+    let fileExists = false;
+    do {
+      directory = nodePath.normalize(directory + "/..");
+      file = nodePath.join(directory, fileToSearchFor);
+      fileExists = fs.existsSync(file);
+      maxNum++;
+    } while (!fileExists && maxNum < maxTry);
+    return {
+      file: file,
+      directory: directory,
+      fileExists: fileExists
+    };
+  }
+
+  /**
+   * Extracts a string from a base string.
+   * @param base  string which will be looked for
+   * @param stripFrom  string to be removed from the base
+   * @param stripStartsWith characters to be stripped out from the resulting string
+   */
+  static diffString(base: string, stripFrom: string, stripStartsWith: string = null) {
+    const strResult = (base.slice(stripFrom.length, base.length));
+    if (stripStartsWith) {
+      return strResult.startsWith(stripStartsWith) ? strResult.slice(stripStartsWith.length, strResult.length) : strResult;
+    }
+    return strResult;
+  }
+
+  /**
+   * Find typescript config path, if your class is  invoking
+   * momotThePug's module in a linear directory back slashes.
+   * @param startScanFrom usually __dirname value is passed
+   * @param rootProjectFile file that marks a directory as root
+   * @param tsconfigFile tsconfig file that marks as typescript project
+   */
+  static findTSConfigToReadFromRoot(startScanFrom: string, rootPath = null, tsconfigFile = "tsconfig.json") {
+    const tsConfigFile = AliasPathUtil.findFileDirectory(startScanFrom, tsconfigFile);
+    const _packageData = Package.projectData(rootPath);
+    if (tsConfigFile.fileExists) {
+      return {
+        diff: AliasPathUtil.diffString(tsConfigFile.directory, _packageData.get("root"), nodePath.sep),
+        ts: tsConfigFile
+      }
+    }
+    throw `Cannot find ${tsconfigFile}: \n tsConfigFile: ${JSON.stringify(tsConfigFile)} `;
   }
 }
